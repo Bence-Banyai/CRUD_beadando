@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Log in to Docker registry
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login -u bencebanyai --password-stdin
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login -u bencebanyai -p ${{ secrets.GHCR_TOKEN }}
 
       - name: Build image
         run: docker build -t ghcr.io/bencebanyai/crud-beadando:latest .

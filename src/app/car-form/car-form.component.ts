@@ -9,7 +9,7 @@ import { CarService } from '../_services/car.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <div class="card p-3">
+    <div class="card p-3 shadow-sm border-0">
       <form #carForm="ngForm" (ngSubmit)="save()">
         <div class="mb-3">
           <label class="form-label">Brand</label>
@@ -17,6 +17,7 @@ import { CarService } from '../_services/car.service';
             [(ngModel)]="tempCar.brand"
             name="brand"
             class="form-control"
+            required
           />
         </div>
         <div class="mb-3">
@@ -25,6 +26,7 @@ import { CarService } from '../_services/car.service';
             [(ngModel)]="tempCar.model"
             name="model"
             class="form-control"
+            required
           />
         </div>
         <div class="mb-3">
@@ -34,6 +36,7 @@ import { CarService } from '../_services/car.service';
             name="year"
             type="number"
             class="form-control"
+            required
           />
         </div>
         <div class="mb-3">
@@ -42,6 +45,7 @@ import { CarService } from '../_services/car.service';
             [(ngModel)]="tempCar.price"
             name="price"
             class="form-control"
+            required
           />
         </div>
         <div class="mb-3">
@@ -60,13 +64,7 @@ import { CarService } from '../_services/car.service';
 export class CarFormComponent {
   @Input() existingCar: Car | null = null;
   @Output() complete = new EventEmitter<boolean>();
-  tempCar: Car = {
-    brand: '',
-    model: '',
-    year: 0,
-    price: '',
-    image_Url: '',
-  };
+  tempCar: Car = { brand: '', model: '', year: 0, price: '', image_Url: '' };
 
   constructor(private carService: CarService) {}
 

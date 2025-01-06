@@ -10,30 +10,36 @@ import { CarFormComponent } from '../car-form/car-form.component';
   standalone: true,
   imports: [CommonModule, CarCardComponent, CarFormComponent],
   template: `
-    <div class="container">
-      <div class="row">
-        <div class="col-12 mb-3">
+    <div class="container my-4">
+      <h2 class="text-center mb-4">Car Inventory</h2>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-auto">
           <button class="btn btn-success" (click)="showForm()">
             Add New Car
           </button>
         </div>
       </div>
-      <div class="row">
-        <app-car-card
-          *ngFor="let c of cars"
-          [car]="c"
-          (edit)="onEdit($event)"
-          (remove)="onDelete($event)"
-        >
-        </app-car-card>
+
+      <div class="row justify-content-center">
+        <div class="col-auto d-flex flex-wrap justify-content-center">
+          <app-car-card
+            *ngFor="let c of cars"
+            class="mx-2 mb-3"
+            [car]="c"
+            (edit)="onEdit($event)"
+            (remove)="onDelete($event)"
+          ></app-car-card>
+        </div>
       </div>
 
-      <app-car-form
-        *ngIf="formVisible"
-        [existingCar]="selectedCar"
-        (complete)="refresh($event)"
-      >
-      </app-car-form>
+      <div class="row justify-content-center" *ngIf="formVisible">
+        <div class="col-12 col-md-6 shadow p-3">
+          <app-car-form
+            [existingCar]="selectedCar"
+            (complete)="refresh($event)"
+          ></app-car-form>
+        </div>
+      </div>
     </div>
   `,
 })

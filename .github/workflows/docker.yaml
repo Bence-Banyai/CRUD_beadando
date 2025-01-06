@@ -1,0 +1,21 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login -u bencebanyai --password-stdin
+
+      - name: Build image
+        run: docker build -t ghcr.io/bencebanyai/crud-beadando:latest .
+
+      - name: Push image
+        run: docker push ghcr.io/bencebanyai/crud-beadando:latest

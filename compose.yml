@@ -1,0 +1,17 @@
+version: '3'
+services:
+  json-server:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: npx json-server data.json --port 3000
+    ports:
+      - '3000:3000'
+
+  angular-app:
+    build: .
+    ports:
+      - '80:80'
+    depends_on:
+      - json-server
